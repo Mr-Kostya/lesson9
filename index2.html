@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>  
+<script>
+const CATEGORY = "category";
+const PRODUCT = "product";
+const menu = [
+  {
+    type: CATEGORY,
+    name: "Mac",
+    menu: [
+      {
+        type: PRODUCT,
+        name: "MacBook Pro 16”"
+      },
+      {
+        type: PRODUCT,
+        name: "iMac 24”"
+      },
+      {
+        type: PRODUCT,
+        name: "iMac 27”"
+      },
+      {
+        type: CATEGORY,
+        name: "Accessories",
+        menu: [
+          {
+            type: CATEGORY,
+            name: "Featured Magic",
+            menu: [
+              {
+                type: PRODUCT,
+                name: "Magic Keyboard"
+              },
+              {
+                type: PRODUCT,
+                name: "Magic Trackpad"
+              }
+            ]
+          },
+          {
+            type: CATEGORY,
+            name: "Audio",
+            menu: [
+              {
+                type: PRODUCT,
+                name: "AirPods Pro"
+              },
+              {
+                type: PRODUCT,
+                name: "AirPods Max"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    type: CATEGORY,
+    name: "Ipad",
+    menu: [
+      {
+        type: PRODUCT,
+        name: "iPad Pro 11”"
+      },
+      {
+        type: PRODUCT,
+        name: "iPad Pro 12.9”"
+      },
+      {
+        type: CATEGORY,
+        name: "Accessories",
+        menu: [
+          {
+            type: PRODUCT,
+            name: "Apple Pencil"
+          },
+          {
+            type: PRODUCT,
+            name: "Smart Keyboard"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    type: CATEGORY,
+    name: "Empty Category",
+    menu: []
+  }
+];
+
+function printMenu(menu, level = 0) {
+  let res = "";
+
+  menu?.forEach((value) => {
+    let str = "";
+
+    const start = ' '.repeat(level)
+
+    if (value?.type === CATEGORY) {
+      str = `* ${value.name}\n`;
+    } else if (value?.type === PRODUCT) {
+      str = `- ${value.name}\n`;
+    }
+
+    str = start + str;
+
+    res = res + str + printMenu(value?.menu, level + 1);
+  });
+
+  return res;
+}
+
+const menuStr = printMenu(menu);
+console.log(menuStr)
+
+</script>
+</body>
+</html>
